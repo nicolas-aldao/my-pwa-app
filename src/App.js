@@ -4,11 +4,6 @@ import { Context } from './Context';
 import { Header } from './components/organisms/Header';
 import { NavBar } from './components/organisms/NavBar';
 import { HomeScreen } from './components/pages/HomeScreen';
-//import { DetailsScreen } from './components/pages/DetailsScreen';
-//import { FavoritesScreen } from './components/pages/FavoritesScreen';
-//import { UserScreen } from './components/pages/UserScreen';
-//import { NotRegisteredUserScreen } from './components/pages/NotRegisteredUserScreen';
-//import { NotFoundScreen } from './components/pages/NotFoundScreen';
 import { GlobalStyle } from './GlobalStyles';
 
 export const App = () => {
