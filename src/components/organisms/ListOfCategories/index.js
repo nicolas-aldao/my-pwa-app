@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Category } from '../../atoms/Category';
 import { List, Item } from './styles';
-import { categories } from '../../../../api/db.json';
 
 export const ListOfCategories = () => {
   const [showFixed, setShowFixed] = useState(false);

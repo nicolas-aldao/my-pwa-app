@@ -7,8 +7,9 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { onError } from '@apollo/client/link/error'
-import { Context, Provider as ContextProvider } from './Context';
+import { onError } from '@apollo/client/link/error';
+import { Provider as AuthProvider } from './context/AuthContext';
+import { Provider as ContextProvider } from './Context';
 
 import { App } from './App';
 
@@ -45,8 +46,10 @@ const client = new ApolloClient({
 const root = createRoot(document.getElementById('app'));
 root.render(
   <ApolloProvider client={client}>
-    <ContextProvider>
-      <App />
-    </ContextProvider>
+    <AuthProvider>
+      <ContextProvider>
+        <App />
+      </ContextProvider>
+    </AuthProvider>
   </ApolloProvider>,
 );

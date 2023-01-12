@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Context } from '../../../Context';
+import { Context as AuthContext } from '../../../context/AuthContext';
 import { UserForm } from '../../organisms/UserForm';
 import { useRegisterMutation } from '../../../hooks/useRegisterMutation';
 import { useLoginMutation } from '../../../hooks/useLoginMutation';
@@ -11,6 +12,8 @@ export default () => {
     loading: loadingLogin,
     error: errorLogin,
   } = useLoginMutation();
+  const { state, signIn, clearErrorMessages } = useContext(AuthContext);
+  console.log("🚀 ~ file: index.js:16 ~ state", state)
 
   return (
     <Context.Consumer>
