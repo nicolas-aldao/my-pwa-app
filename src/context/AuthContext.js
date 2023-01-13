@@ -24,9 +24,9 @@ const signUp = dispatch => {
       const response = await trackApi.post('/signup', { email, password });
       window.localStorage.setItem('token', response.data.token);
       dispatch({ type: 'signin-or-signup', payload: response.data.token });
-      if (callback) {
-        callback();
-      }
+      // if (callback) {
+      //   callback();
+      // }
     } catch (err) {
       dispatch({
         type: 'add_error',

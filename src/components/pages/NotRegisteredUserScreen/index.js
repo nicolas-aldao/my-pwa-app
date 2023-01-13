@@ -13,20 +13,22 @@ export default () => {
     loading: loadingLogin,
     error: errorLogin,
   } = useLoginMutation();
-  const { state, signIn, clearErrorMessages } = useContext(AuthContext);
+  const { state, signIn, signUp, clearErrorMessages } = useContext(AuthContext);
   console.log('🚀 ~ file: index.js:16 ~ state', state);
   const { activateAuth } = useContext(OldContext);
 
   return (
     <Context.Consumer>
       {({ activateAuth }) => {
-        const onSubmit = ({ email, password }) => {
-          const input = { email, password };
-          const variables = { input };
-          registerMutation({ variables }).then(data => {
-            const { signup } = data.data;
-            activateAuth(signup);
-          });
+        const onSubmitRegister = async ({ email, password }) => {
+          // const input = { email, password };
+          // const variables = { input };
+          // registerMutation({ variables }).then(data => {
+          //   const { signup } = data.data;
+          //   activateAuth(signup);
+          // });
+          const token = await signUp({ email, password });
+          await activateAuth(token);
         };
 
         const onSubmitLogin = async ({ email, password }) => {
@@ -52,7 +54,7 @@ export default () => {
               disabled={loading}
               error={errorMsg}
               title="Sign up"
-              onSubmit={onSubmit}
+              onSubmit={onSubmitRegister}
             />
             <UserForm
               disabled={loadingLogin}

@@ -22,8 +22,8 @@ const blogReducer = (state, action) => {
   switch (action.type) {
     case 'get_blogposts':
       // action.payload.map(num => {
-      //   return console.log(num);
-      // });
+        //   return console.log(num);
+        // });
       return action.payload;
     case 'add_blogpost':
       return [

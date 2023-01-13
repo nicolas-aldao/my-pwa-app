@@ -9,6 +9,7 @@ import {
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 import { Provider as AuthProvider } from './context/AuthContext';
+import { Provider as BlogProvider } from './context/AppContext';
 import { Provider as ContextProvider } from './Context';
 
 import { App } from './App';
@@ -46,10 +47,12 @@ const client = new ApolloClient({
 const root = createRoot(document.getElementById('app'));
 root.render(
   <ApolloProvider client={client}>
-    <AuthProvider>
-      <ContextProvider>
-        <App />
-      </ContextProvider>
-    </AuthProvider>
+    <BlogProvider>
+      <AuthProvider>
+        <ContextProvider>
+          <App />
+        </ContextProvider>
+      </AuthProvider>
+    </BlogProvider>
   </ApolloProvider>,
 );

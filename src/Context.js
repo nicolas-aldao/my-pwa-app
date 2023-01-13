@@ -10,6 +10,7 @@ const Provider = props => {
   });
 
   const activateAuth = token => {
+    console.log('running activateAuth');
     setIsAuth(true);
     window.sessionStorage.setItem('token', token);
   };
