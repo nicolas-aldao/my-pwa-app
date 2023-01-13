@@ -4,6 +4,7 @@ import { Context as AuthContext } from '../../../context/AuthContext';
 import { UserForm } from '../../organisms/UserForm';
 import { useRegisterMutation } from '../../../hooks/useRegisterMutation';
 import { useLoginMutation } from '../../../hooks/useLoginMutation';
+import { Context as OldContext } from '../../../Context';
 
 export default () => {
   const { registerMutation, loading, error } = useRegisterMutation();
@@ -13,7 +14,8 @@ export default () => {
     error: errorLogin,
   } = useLoginMutation();
   const { state, signIn, clearErrorMessages } = useContext(AuthContext);
-  console.log("🚀 ~ file: index.js:16 ~ state", state)
+  console.log('🚀 ~ file: index.js:16 ~ state', state);
+  const { activateAuth } = useContext(OldContext);
 
   return (
     <Context.Consumer>
@@ -27,14 +29,16 @@ export default () => {
           });
         };
 
-        const onSubmitLogin = ({ email, password }) => {
-          const input = { email, password };
-          const variables = { input };
-          login({ variables }).then(data => {
-            const { login } = data.data;
-            console.log(login);
-            activateAuth(login);
-          });
+        const onSubmitLogin = async ({ email, password }) => {
+          // const input = { email, password };
+          // const variables = { input };
+          // login({ variables }).then(data => {
+          //   const { login } = data.data;
+          //   console.log(login);
+          //   activateAuth(login);
+          // });
+          const token = await signIn({ email, password });
+          await activateAuth(token);
         };
 
         const errorMsg = error && 'The user already exists.';

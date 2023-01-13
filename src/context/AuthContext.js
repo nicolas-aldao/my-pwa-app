@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import createDataContext from './createDataContext';
 import trackApi from '../services/trackApi';
 
@@ -18,6 +19,7 @@ const authReducer = (state, action) => {
 
 const signUp = dispatch => {
   return async ({ email, password }, callback) => {
+    
     try {
       const response = await trackApi.post('/signup', { email, password });
       window.localStorage.setItem('token', response.data.token);
@@ -40,10 +42,12 @@ const signIn = dispatch => {
       const response = await trackApi.post('/signin', { email, password });
       window.localStorage.setItem('token', response.data.token);
       dispatch({ type: 'signin-or-signup', payload: response.data.token });
-      if (callback) {
-        callback();
-      }
+      return response.data.token;
+      // if (callback) {
+      //   callback();
+      // }
     } catch (err) {
+      console.log("🚀 ~ file: AuthContext.js:54 ~ return ~ err", err)
       dispatch({
         type: 'add_error',
         payload: 'Something went wrong with sign in',
